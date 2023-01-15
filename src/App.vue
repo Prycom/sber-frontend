@@ -3,24 +3,67 @@ import HeaderVue from './components/Header.vue';
 import Footer from './components/Footer.vue';
 import ButtonVue from './components/Button.vue';
 
+import configList from './components/config-list.vue';
+import configNote from './components/config-note.vue';
+
+import MainPart from './components/MainPart.vue';
+
 import axios from 'axios';
 
-
-const jsonExample = {
-  user_login: 'string',
-  nexus_login: 'string',
-  tokens: {
-    sigma: 'string',
-    omega: 'string',
-  }
+var data = [{
+    component: configNote,
+    name: "nexus_login",
+    content: "",
+    _uid: "1"
+},{
+    component: configNote,
+    name: "nexus_password",
+    content: "",
+    _uid: "2"
+},{
+    component: configNote,
+    name: "ipa_login",
+    content: "",
+    _uid: "3"
+},{
+    component: configList,
+    _uid: "4",
+    name: "Test Header",
+    content: [
+      {
+        component: configNote,
+        name: "test",
+        content: "",
+        _uid: "5",
+    },{
+        component: configNote,
+        name: "test2",
+        content: "",
+        _uid: "6",
+    },
+    {
+        component: configList,
+        _uid: "7",
+        name: "Inline list test",
+        content: [
+          {
+            component: configNote,
+            _uid: "8",
+            name: "One more inline",
+            content: "",
+          }
+        ]
+    },
+    {
+      component: configNote,
+      _uid: "9",
+      name: "New test",
+      content: "",
+    }
+  ],
 }
+]
 
-const listExample = [];
-listExample.push('user_login', 'nexus_login', { tokens : ['sigma', 'omega']});
-
-function parseFields(){
-
-}
 
 function userSettings(){
   const path = 'http://localhost:5000/userSettings';
@@ -41,6 +84,7 @@ function mlops(){
 
 function putter(){
   console.log('putter');
+  console.log(1)
 }
 
 </script>
@@ -57,9 +101,7 @@ function putter(){
         <ButtonVue label="putter" @onExec="putter"/>
       </aside>
       <div class="content-center w-full px-4">
-        <div class="h-full px-4 py-4" id="main"><!---MAIN PART-->
-
-        </div>
+        <MainPart :data="data"/>
       </div>
     </div>
 
