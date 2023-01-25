@@ -12,8 +12,6 @@ export default{
     name: "config-list"
 }
 
-
-
 </script>
 
 <template>

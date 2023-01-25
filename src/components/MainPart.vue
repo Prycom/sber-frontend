@@ -6,6 +6,17 @@ import configNote from './config-note.vue';
 export default {
     props: {
         data: Object,
+    },
+    methods: {
+        storeInit(){
+            console.log(1)
+            this.$store.commit('contentSet', this.data)
+            console.log(this.$store.state)
+            console.log(this.data)
+        }
+    },
+    mounted(){
+        this.storeInit()
     }
 }
 </script>

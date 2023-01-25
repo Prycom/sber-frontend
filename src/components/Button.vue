@@ -18,7 +18,7 @@ export default {
     <div class="flex flex-col px-8 py-4 ">
         <button
             @click="exec"
-            class="px-4 py-4 bg-green-600 rounded-full text-white font-bold transition ease-in-out hover:bg-green-300">
+            class="px-4 py-4 bg-green-600 rounded-xl text-white font-bold transition ease-in-out hover:bg-green-300">
             {{ label }}
         </button>
     </div>
