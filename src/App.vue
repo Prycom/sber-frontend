@@ -58,7 +58,7 @@ var data = [{
       component: configNote,
       _uid: "9",
       name: "New test",
-      content: "",
+      content: "asd",
     }
   ],
 }
