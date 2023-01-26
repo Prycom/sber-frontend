@@ -2,13 +2,11 @@
 import HeaderVue from './components/Header.vue';
 import Footer from './components/Footer.vue';
 import ButtonVue from './components/Button.vue';
-
 import configList from './components/config-list.vue';
 import configNote from './components/config-note.vue';
-
 import MainPart from './components/MainPart.vue';
-
 import axios from 'axios';
+import { ref, toRaw } from 'vue';
 
 var data = [{
     component: configNote,
@@ -64,17 +62,44 @@ var data = [{
 }
 ]
 
+function convCompNames(content){
+  content.forEach(element => {
+    if(typeof element.content === 'string'){
+      element.component = configNote
+    }
+    if(typeof element.content === 'object'){
+      element.component = configList
+      convCompNames(element.content)
+    }
+  });
+}
+
+const key = ref(0)
+
+var content = []
+
+const forceRerender = (newValue) => {
+  console.log('content changed')
+  key.value++
+};
+
+var path = ''
 
 function userSettings(){
-  const path = 'http://localhost:5000/userSettings';
-  axios.get(path)
-    .then((res) => {
-      console.log(res.data);
-    })
-    .catch((error) => {
-      // eslint-выключение следующей строки
-      console.error(error);
-    });
+  axios.get('http://127.0.0.1:5000/user_settings')
+  .then(function (response) {
+    content = response.data
+    path = 'user_settings'
+    convCompNames(content)
+    forceRerender()
+  })
+  .catch(function (error) {
+    console.log(error);
+  })
+  .then(function () {
+
+  });
+
 }
 
 function mlops(){
@@ -101,7 +126,7 @@ function putter(){
         <ButtonVue label="putter" @onExec="putter"/>
       </aside>
       <div class="content-center w-full px-4">
-        <MainPart :data="data"/>
+        <MainPart :data="content" :key="key" :path="path"/>
       </div>
     </div>
 

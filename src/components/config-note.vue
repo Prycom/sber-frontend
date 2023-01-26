@@ -25,10 +25,8 @@ export default{
             return payload
         },
         onNoteChange(){
-            console.log(this.note_content)
             const payload = this.$store.state.content
             this.$store.commit('contentSet', this.editInPayload(payload))
-            console.log(this.$store.state)
         }
     },
     mounted(){
