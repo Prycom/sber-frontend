@@ -16,20 +16,23 @@ export default {
         storeInit() {
             this.$store.commit("contentSet", this.data);
         },
+        componentNamesToText(content){
+            content.forEach(element => {
+                if(typeof element.content === 'string'){
+                element.component = "configNote"
+                }
+                if(typeof element.content === 'object'){
+                element.component = "configList"
+                this.componentNamesToText(element.content)
+                }
+            });
+        },
         saveToJSON(){
             const payload = this.$store.state.content
             console.log(toRaw(payload))
-
-            var formData = new FormData();
-            formData.append("user_settings",  JSON.stringify(payload));
-            const fullpath = 'http://127.0.0.1:5000/' + this.path
-
-            console.log(fullpath)
-            axios.post('http://127.0.0.1:5000/'+ this.path, formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                }
-            })
+            this.componentNamesToText(payload)
+            const url = 'http://localhost:5000/' + this.path;
+            const res = axios.post(url, payload)
         }
     },
     mounted() {
