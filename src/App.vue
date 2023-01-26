@@ -23,7 +23,7 @@ var data = [{
 },{
     component: configNote,
     name: "ipa_login",
-    content: "",
+    content: "asdasd",
     _uid: "3"
 },{
     component: configList,
