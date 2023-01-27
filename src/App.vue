@@ -105,8 +105,20 @@ function userSettings(){
 }
 
 function mlops(){
-  console.log(listExample);
-  let main = document.getElementById("main");
+  axios.get('http://127.0.0.1:5000/mlops')
+  .then(function (response) {
+    content = response.data
+    path = 'mlops'
+    convCompNames(content)
+    forceRerender()
+  })
+  .catch(function (error) {
+    console.log(error);
+  })
+  .then(function () {
+
+  });
+
 }
 
 function putter(){
