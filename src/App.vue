@@ -8,60 +8,6 @@ import MainPart from './components/MainPart.vue';
 import axios from 'axios';
 import { ref, toRaw } from 'vue';
 
-var data = [{
-    component: configNote,
-    name: "nexus_login",
-    content: "",
-    _uid: "1"
-},{
-    component: configNote,
-    name: "nexus_password",
-    content: "",
-    _uid: "2"
-},{
-    component: configNote,
-    name: "ipa_login",
-    content: "asdasd",
-    _uid: "3"
-},{
-    component: configList,
-    _uid: "4",
-    name: "Test Header",
-    content: [
-      {
-        component: configNote,
-        name: "test",
-        content: "",
-        _uid: "5",
-    },{
-        component: configNote,
-        name: "test2",
-        content: "",
-        _uid: "6",
-    },
-    {
-        component: configList,
-        _uid: "7",
-        name: "Inline list test",
-        content: [
-          {
-            component: configNote,
-            _uid: "8",
-            name: "One more inline",
-            content: "",
-          }
-        ]
-    },
-    {
-      component: configNote,
-      _uid: "9",
-      name: "New test",
-      content: "asd",
-    }
-  ],
-}
-]
-
 function convCompNames(content){
   content.forEach(element => {
     if(typeof element.content === 'string'){
