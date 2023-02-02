@@ -20,8 +20,6 @@ function convCompNames(content){
   });
 }
 
-
-
 const key = ref(0)
 
 var content = []
@@ -68,8 +66,51 @@ function mlops(){
 }
 
 function putter(){
-  console.log('putter');
-  console.log(1)
+  axios.get('http://127.0.0.1:5000/pusher')
+  .then(function (response) {
+    content = response.data
+    path = 'pusher'
+    convCompNames(content)
+    forceRerender()
+  })
+  .catch(function (error) {
+    console.log(error);
+  })
+  .then(function () {
+
+  });
+}
+
+function amrlirt(){
+  axios.get('http://127.0.0.1:5000/amrlirt')
+  .then(function (response) {
+    content = response.data
+    path = 'amrlirt'
+    convCompNames(content)
+    forceRerender()
+  })
+  .catch(function (error) {
+    console.log(error);
+  })
+  .then(function () {
+
+  });
+}
+
+function hasher(){
+  axios.get('http://127.0.0.1:5000/hasher')
+  .then(function (response) {
+    content = response.data
+    path = 'hasher'
+    convCompNames(content)
+    forceRerender()
+  })
+  .catch(function (error) {
+    console.log(error);
+  })
+  .then(function () {
+
+  });
 }
 
 </script>
@@ -81,9 +122,11 @@ function putter(){
     <HeaderVue />
     <div class="flex min-h-full h-full">
       <aside class="w-1/4 min-h-full px-4 flex flex-col flex flex-col justify-center border-r-2 border-[#34353B]">
-        <ButtonVue label="user settings" @onExec="userSettings"/>
-        <ButtonVue label="mlops" @onExec="mlops"/>
-        <ButtonVue label="putter" @onExec="putter"/>
+        <ButtonVue label="User settings" @onExec="userSettings"/>
+        <ButtonVue label="MLops" @onExec="mlops"/>
+        <ButtonVue label="Amrlirt" @onExec="amrlirt"/>
+        <ButtonVue label="Hasher" @onExec="hasher" />
+        <ButtonVue label="Перекладчик" @onExec="putter"/>
       </aside>
       <div class="content-center w-full px-4">
         <MainPart :data="content" :key="key" :path="path"/>
